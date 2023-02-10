@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "./HomePage.css";
 import SearchBar from "../../components/searchbar/SearchBar";
-import {format} from "date-fns";
+import transformDate from "../../components/transformdate/TransformDate";
 
 
 // const apiKey = process.env.OVIO_API_KEY;
@@ -10,7 +10,7 @@ import {format} from "date-fns";
 function HomePage() {
     const [carData, setCarData] = useState({});
     const [kenteken, setKenteken] = useState("");
-
+    const [date, setDate] = useState("");
 
 
     useEffect(() => {
@@ -30,6 +30,8 @@ function HomePage() {
                 }
             });
             setCarData(response.data);
+            setDate(carData.datum_eerste_toelating);
+            console.log(date.split("-"));
             console.log(response.data);
             console.log("Trade name:", response.data.merk, response.data.handelsbenaming);
             console.log("First admission:", response.data.datum_eerste_toelating);
@@ -38,6 +40,8 @@ function HomePage() {
             console.error(e);
         }
     }
+
+
 
     return (
         <div className="outer-container">
@@ -48,12 +52,12 @@ function HomePage() {
                 </div>
             </header>
             <main className="inner-container">
-                {Object.keys(carData).length > 0 &&
+                {Object.keys(carData, date).length > 0 &&
                     <>
                         <h4>trade name</h4>
                         <h2>{carData.merk} {carData.handelsbenaming}</h2>
                         <h4>date of first admission</h4>
-                        <h2>{(carData.datum_eerste_toelating).split("-")}</h2>
+                        <h2>{date}</h2>
                         <h4>fuel description</h4>
                         <h2>{carData.brandstof[0].brandstof_omschrijving}</h2>
                     </>

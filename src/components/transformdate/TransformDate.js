@@ -1,12 +1,16 @@
 import React from "react";
 
 
-function transformDate(timestamp) {
+const {format} = require("date-fns/locale/nl");
 
 
-    const dateArray = date.split("-");
-    const newDate = `${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`
-    return newDate;
+function transformDate(formatDate) {
+    const date = new Date(formatDate);
+    const dutchLocale = require("date-fns/locale/nl");
+    const formattedDate = format(date, "dd.MM.yyyy", {
+        locale: dutchLocale
+    });
+    return formattedDate
 }
-}
+
 export default transformDate;
