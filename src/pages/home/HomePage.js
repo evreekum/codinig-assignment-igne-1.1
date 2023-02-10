@@ -47,10 +47,8 @@ function HomePage() {
     return (
         <div className="outer-container">
             <header className="inner-container">
-                <div>
-                    <h1>Please enter your license plate number</h1>
-                    <SearchBar setKentekenHandler={setKenteken}/>
-                </div>
+                <h1>Please enter your license plate number</h1>
+                <SearchBar setKentekenHandler={setKenteken}/>
             </header>
             <main className="inner-container">
                 {Object.keys(carData).length > 0 &&

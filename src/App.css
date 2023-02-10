@@ -21,13 +21,14 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /*align-content: space-around;*/
+    align-content: space-around;
     align-items: center;
 }
 
 form {
     display: flex;
     justify-content: center;
+
 }
 
 button {
@@ -49,6 +50,18 @@ h2 {
 h2:first-letter,
 h4:first-letter {
     text-transform: capitalize;
+}
+
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between;
+    align-items: center;
+    height: 300px;
+    width: 100%;
+    border: 1px solid black;
 }
 
 main {
