@@ -42,6 +42,10 @@ h1 {
     color: whitesmoke;
 }
 
+h2 {
+    text-transform: lowercase;
+}
+
 h2:first-letter,
 h4:first-letter {
     text-transform: capitalize;
