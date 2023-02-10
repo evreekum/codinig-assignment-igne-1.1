@@ -2,8 +2,8 @@ import React, {useState} from "react";
 
 
 function SearchBar({setKentekenHandler}) {
-    const [query, setQuery] = useState("");
-
+    const [query, setQuery] = useState("6-XXH-68");
+    const cleanSearch = () => setQuery("");
     function onFormSubmit(e) {
         e.preventDefault();
         setKentekenHandler(query);
@@ -17,6 +17,7 @@ function SearchBar({setKentekenHandler}) {
                     name="search"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
+                    onClick={cleanSearch}
                     placeholder="6-XXH-68"
                 />
                 <button

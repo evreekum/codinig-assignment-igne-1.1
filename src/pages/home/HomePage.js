@@ -2,16 +2,18 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "./HomePage.css";
 import SearchBar from "../../components/searchbar/SearchBar";
-import transformDate from "../../components/transformdate/TransformDate";
+import FormatDate from "../../helpers/FormatDate";
 
 
 // const apiKey = process.env.OVIO_API_KEY;
 
 function HomePage() {
     const [carData, setCarData] = useState({});
-    const [kenteken, setKenteken] = useState("");
-    const [date, setDate] = useState("");
+    const [kenteken, setKenteken] = useState("6-XXH-68");
 
+    // useEffect(() => {
+    //     fetchData();
+    // }, []);
 
     useEffect(() => {
         if (kenteken) {
@@ -30,8 +32,8 @@ function HomePage() {
                 }
             });
             setCarData(response.data);
-            setDate(carData.datum_eerste_toelating);
-            console.log(date.split("-"));
+            // setDate(carData.datum_eerste_toelating);
+            // console.log(date.split("-"));
             console.log(response.data);
             console.log("Trade name:", response.data.merk, response.data.handelsbenaming);
             console.log("First admission:", response.data.datum_eerste_toelating);
@@ -40,7 +42,6 @@ function HomePage() {
             console.error(e);
         }
     }
-
 
 
     return (
@@ -52,12 +53,12 @@ function HomePage() {
                 </div>
             </header>
             <main className="inner-container">
-                {Object.keys(carData, date).length > 0 &&
+                {Object.keys(carData).length > 0 &&
                     <>
                         <h4>trade name</h4>
                         <h2>{carData.merk} {carData.handelsbenaming}</h2>
                         <h4>date of first admission</h4>
-                        <h2>{date}</h2>
+                        <h2>{FormatDate(carData.datum_eerste_toelating)}</h2>
                         <h4>fuel description</h4>
                         <h2>{carData.brandstof[0].brandstof_omschrijving}</h2>
                     </>
