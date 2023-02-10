@@ -1,26 +1,36 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "./HomePage.css";
+import SearchBar from "../../components/searchbar/SearchBar";
 
 
 // const apiKey = process.env.OVIO_API_KEY;
 
 function HomePage() {
-    const [search, setSearch] = useState("");
+    const [carData, setCarData] = useState({});
+    const [kenteken, setKenteken] = useState("");
+
+    useEffect(() => {
+        if (kenteken) {
+            fetchData();
+        }
+    }, [kenteken]);
 
     async function fetchData() {
 
         try {
-            const response = await axios.get(`https://api.overheid.io/voertuiggegevens?ovio-api-key=d34842dc4ab353fd52eb5bacccfcca8c4c9fdf5b06fe4e95073642e3566de88c`, {
+            const response = await axios.get(`https://api.overheid.io/voertuiggegevens/${kenteken}`, {
                 mode: "onSubmit",
                 headers: {
                     "Content-Type": "application/json",
-                }, params: {
-                    query: search,
+                    "ovio-api-key": "d34842dc4ab353fd52eb5bacccfcca8c4c9fdf5b06fe4e95073642e3566de88c",
                 }
             });
-            console.log(search);
+            setCarData(response.data);
             console.log(response.data);
+            console.log("Trade name:", response.data.handelsbenaming);
+            console.log("First admission:", response.data.datum_eerste_toelating);
+            console.log("Fuel description:", response.data.brandstof[0].brandstof_omschrijving);
         } catch (e) {
             console.error(e);
         }
@@ -31,29 +41,26 @@ function HomePage() {
             <header className="inner-container">
                 <div>
                     <h1>Please enter your license plate number</h1>
-                    <form onSubmit={fetchData}>
-                        <input type="search"/>
-                        <button type="submit">
-                            send
-                        </button>
-                    </form>
+                    <SearchBar setKentekenHandler={setKenteken}/>
                 </div>
             </header>
             <main className="inner-container">
-                <h4>trade name</h4>
-                <h2>volkswagen golf</h2>
-                <h4>date of first admission</h4>
-                <h2>09-12-2013</h2>
-                <h4>fuel description</h4>
-                <h2>diesel</h2>
+                {Object.keys(carData).length > 0 &&
+                    <>
+                        <h4>trade name</h4>
+                        <h2>{carData.handelsbenaming}</h2>
+                        <h4>date of first admission</h4>
+                        <h2>{carData.datum_eerste_toelating}</h2>
+                        <h4>fuel description</h4>
+                        <h2>{carData.brandstof[0].brandstof_omschrijving}</h2>
+                    </>
+                }
             </main>
             <footer className="inner-container">
 
 
             </footer>
-            <button type='button' onClick={fetchData}>
-                Haal Data Op!
-            </button>
+
         </div>
     )
 }
