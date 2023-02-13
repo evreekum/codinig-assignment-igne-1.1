@@ -37,6 +37,7 @@ h1 {
     font-size: 20px;
 }
 
+
 @media screen and (min-width: 768px) {
     h1 {
         font-size: 24px;
@@ -48,6 +49,17 @@ h1 {
     h1 {
         font-size: 28px;
     }
+
+    /*.swiper_img {*/
+    /*    width: auto;*/
+    /*    height: 200px;*/
+    /*    object-fit: cover;*/
+    /*    border-radius: 4px;*/
+
+    /*    !*width: auto;*!*/
+    /*    !*height: auto;*!*/
+    /*    !*content: ;*!*/
+    /*}*/
 
 }
 
@@ -97,7 +109,7 @@ header {
     justify-self: flex-start;
     align-self: flex-start;
     width: 100%;
-    /*height: 400px;*/
+    max-height: 400px;
     object-fit: cover;
     background-blend-mode: hard-light;
     background-color: black;
@@ -190,12 +202,12 @@ main {
 }
 
 
-img {
-    width: 600px;
+.swiper_img {
+    flex-basis: 600px;
     height: 400px;
     object-fit: cover;
     border-radius: 4px;
-
+    flex-shrink: 3;
     /*width: auto;*/
     /*height: auto;*/
     /*content: ;*/

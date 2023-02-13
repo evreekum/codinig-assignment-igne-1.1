@@ -84,29 +84,29 @@ function HomePage() {
         }
     }
 
-    // const swiper = new Swiper('.swiper', {
-    //     // Default parameters
-    //     slidesPerView: 1,
-    //     spaceBetween: 10,
-    //     // Responsive breakpoints
-    //     breakpoints: {
-    //         // when window width is >= 320px
-    //         320: {
-    //             slidesPerView: 2,
-    //             spaceBetween: 20
-    //         },
-    //         // when window width is >= 480px
-    //         480: {
-    //             slidesPerView: 3,
-    //             spaceBetween: 30
-    //         },
-    //         // when window width is >= 640px
-    //         640: {
-    //             slidesPerView: 4,
-    //             spaceBetween: 40
-    //         }
-    //     }
-    // })
+/*    const swiper = new Swiper('.swiper', {
+        // Default parameters
+        slidesPerView: 1,
+        spaceBetween: 10,
+        // Responsive breakpoints
+        breakpoints: {
+            // when window width is >= 320px
+            320: {
+                slidesPerView: 2,
+                spaceBetween: 20
+            },
+            // when window width is >= 480px
+            480: {
+                slidesPerView: 3,
+                spaceBetween: 30
+            },
+            // when window width is >= 640px
+            640: {
+                slidesPerView: 4,
+                spaceBetween: 40
+            }
+        }
+    })*/
 
     return (
         <div className="outer-container">
@@ -132,8 +132,8 @@ function HomePage() {
             <footer className="swiper-wrapper inner-container" id="swiper-wrapper">
                 <Swiper
                     modules={[Navigation, Pagination, Scrollbar]}
-                    spaceBetween={15}
-                    slidesPerView={3}
+                    spaceBetween={30}
+                    slidesPerView={1}
                     // slidesPerGroup={9}
                     loop={true}
                     navigation={true}
@@ -141,13 +141,35 @@ function HomePage() {
                     // scrollbar={{draggable: true}}
                     className="mySwiper"
                     id="mySwiper"
+                    breakpoints={{
+                        576: {
+                            slidesPerView: 1
+                        },
+                        768: {
+                            slidesPerView: 2,
+                        },
+                        992: {
+                            slidesPerView: 2,
+                            spaceBetween: 30
+                        },
+                        1200: {
+                            slidesPerView: 3,
+                            spaceBetween: 30
+                        },
+                        1600: {
+                            slidesPerView: 3,
+                            spaceBetween: 30
+                        }
+
+                        }
+                    }
 
                 >
                     {Object.keys(imageData).length > 0 && imageData.map((image) => (
                         <SwiperSlide key={image.blur_hash}>
                             <div>
                                 <img
-
+                                    className="swiper_img"
                                     src={image.urls.regular}
                                     alt="Car image"
 
