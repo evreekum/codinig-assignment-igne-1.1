@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 
 
-function SearchBar({setKentekenHandler}) {
+function SearchBar({setKentekenHandler, setImageHandler}) {
     const [query, setQuery] = useState("6-XXH-68");
     const cleanSearch = () => setQuery("");
     function onFormSubmit(e) {
         e.preventDefault();
         setKentekenHandler(query);
+        setImageHandler(query);
     }
 
     return (
